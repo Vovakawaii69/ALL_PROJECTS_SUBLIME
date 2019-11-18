@@ -12,12 +12,13 @@
         <title>JSP Page</title>
     </head>
     <body>
-       <h1>Привеееет группа SKTVp18!</h1> 
-             ${info}<br>
-       <a href="page1"> Page1</a><br>
+       <h1>Привет группа SKTVp18!</h1> 
+             ${info}</br>
+        <p>Создана книга: $(book.title)</p>     
+       <a href="page1">Page1</a><br>
        <a href="page2?name=ivan&lastname=ivanov"> Page2</a><br> 
-       <a href="page3"> Page3</a><br>
-       <a href="page4"> Page4</a><br>
-        <a href="CreateBook"> </a><br>
+       <a href="page3">Page3</a><br>
+       <a href="page4">Page4</a><br>
+        <a href="CreateBook"> Создать книгу </a><br>
     </body>
 </html>

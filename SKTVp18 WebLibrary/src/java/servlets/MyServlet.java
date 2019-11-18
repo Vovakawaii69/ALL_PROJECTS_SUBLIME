@@ -5,13 +5,16 @@
  */
 package servlets;
 
+import entity.Book;
 import java.io.IOException;
 import java.io.PrintWriter;
+import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import session.BookFacade;
 
 /**
  *
@@ -24,10 +27,10 @@ import javax.servlet.http.HttpServletResponse;
     "/page3",
     "/page4",
     "/hello",
-    "/CreateBook"
+    "/CreateBook",
 })
 public class MyServlet extends HttpServlet {
-
+@EJB BookFacade bookFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -40,11 +43,16 @@ public class MyServlet extends HttpServlet {
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
         response.setContentType("text/html;charset=UTF-8");
+         request.setCharacterEncoding("UTF-8");
        String path = request.getServletPath();
-        
-        switch (path) {
+          switch (path) {
             case"/CreateBook":
-                book
+                Book book = new Book("Voina i mir","Lev Tolstoi", 2010, 5);
+                bookFacade.create(book);
+                request.setAttribute("info", "Книга создана");
+                request.setAttribute("book", book);
+                request.getRequestDispatcher("/index.jsp")
+                        .forward(request, response);
                 break;      
             case"/login":
                 String login = request.getParameter("login");
@@ -80,7 +88,6 @@ public class MyServlet extends HttpServlet {
              
                  info = "Привет!";
                 request.setAttribute(info,"info");
-             
                 request.getRequestDispatcher("/page4.jsp").forward(request, response);
                
                 break;

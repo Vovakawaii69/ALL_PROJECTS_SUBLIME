@@ -13,7 +13,7 @@
     </head>
     <body>
        <div> Privet!</div>
-           ${info}<br>
+           ${info}
        <from action = "hello" method="POST"><br>
          name <input type = "text" name = "name"><br>
          lastname <input type = "text" name = "lastname"><br>
