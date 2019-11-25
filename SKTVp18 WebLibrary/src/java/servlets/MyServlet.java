@@ -6,8 +6,12 @@
 package servlets;
 
 import entity.Book;
+import entity.History;
+import entity.Reader;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
+import java.util.List;
 import javax.ejb.EJB;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -15,22 +19,30 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import session.BookFacade;
+import session.HistoryFacade;
+import session.ReaderFacade;
 
 /**
  *
  * @author user
  */
 @WebServlet(name = "MyServlet", urlPatterns = {
-    "/login",
-    "/page1",
-    "/page2",
-    "/page3",
-    "/page4",
-    "/hello",
-    "/CreateBook",
+ 
+    "/showLogin",
+    "/Login",
+    "/newBook",
+    "/addBook",
+    "/listBook",
+    "/newReader",
+    "/addReader",
+    "/showtakeOnBook",
+    "/takeOnBook",
+    "/showReturnBook"
 })
 public class MyServlet extends HttpServlet {
-@EJB BookFacade bookFacade;
+ @EJB BookFacade bookFacade;
+ @EJB ReaderFacade readerFacade;
+ @EJB HistoryFacade historyFacade;
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
      * methods.
@@ -41,20 +53,51 @@ public class MyServlet extends HttpServlet {
      * @throws IOException if an I/O error occurs
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
-            throws ServletException, IOException {
+            throws ServletException, IOException{
         response.setContentType("text/html;charset=UTF-8");
-         request.setCharacterEncoding("UTF-8");
-       String path = request.getServletPath();
-          switch (path) {
-            case"/CreateBook":
-                Book book = new Book("Voina i mir","Lev Tolstoi", 2010, 5);
+        request.setCharacterEncoding("UTF-8");
+        String path = request.getServletPath();
+       
+          switch (path) {    
+              case "/newBook":
+               request.getRequestDispatcher("/WEB-INF/newBook.jsp")
+                        .forward(request, response);
+                break; 
+              case "addBook":
+                String title = request.getParameter ("title") ;
+                String author= request.getParameter ("author") ;
+                String year= request.getParameter ("year") ;
+                String quentity= request.getParameter ("quentity") ; 
+                Book book = new Book(title, author, Integer.parseInt(year), Integer.parseInt(quentity));
                 bookFacade.create(book);
                 request.setAttribute("info", "Книга создана");
-                request.setAttribute("book", book);
+                request.getRequestDispatcher("/WEB-INF/newBook.jsp")
+                        .forward(request, response);
+                 break;
+             case "/listBook":
+                 List<Book> listBook = bookFacade.findAll();
+                 request.setAttribute("listBooks", listBook);
+                 request.getRequestDispatcher ("WEB-INF/listBooks.jsp")
+                          .forward(request, response);
+                 break; 
+                 
+            case "/addReader":
+                String name = request.getParameter("name");
+                String lastname = request.getParameter("lastname");
+                String email = request.getParameter("email");
+                Reader reader = new Reader(name, lastname, email);  
+                readerFacade.create(reader);
+                request.setAttribute("info", "Пользователь создан");
                 request.getRequestDispatcher("/index.jsp")
                         .forward(request, response);
-                break;      
-            case"/login":
+                break; 
+             case "/listReader" :
+                List<Book> listReader = bookFacade.findAll();  
+                    request.setAttribute("listReader", listReader);
+                 request.getRequestDispatcher ("WEB-INF/listBooks.jsp")
+                          .forward(request, response);
+              
+            case "/login":
                 String login = request.getParameter("login");
                 String password = request.getParameter("password");
                 if("ivan".equals(login)&& "123123".equals(password)){
@@ -62,46 +105,46 @@ public class MyServlet extends HttpServlet {
                 }else{
                  request.setAttribute("info", "Неправельный логин или пароль");
                 } 
-              request.getRequestDispatcher("/index.jsp")
+                request.getRequestDispatcher("/index.jsp")
                       .forward(request, response);
-                break;
-                
-            case "/page1":
-                String info = "Привет от Сервлета!";
-                request.setAttribute(info,"info");
-                request.getRequestDispatcher("/WEB-INF/page1.jsp").forward(request, response);
-                break;
-            case "/page2":
-                String name = request.getParameter("name");
-                String lastname = request.getParameter("lastname");
-                info = "Привет от Сервлета!";
-                request.setAttribute(info,"info");
-                request.setAttribute("page", name + " " + lastname);
-                request.getRequestDispatcher("/WEB-INF/page2.jsp").forward(request, response);
-                break;
-            case "/page3":
-                 info = "Привет от Сервлета!";
-                request.setAttribute(info,"info");
-                request.getRequestDispatcher("/WEB-INF/page3.jsp").forward(request, response);
-                break;
-            case "/page4":
-             
-                 info = "Привет!";
-                request.setAttribute(info,"info");
-                request.getRequestDispatcher("/page4.jsp").forward(request, response);
-               
-                break;
-                
+                 break; 
             case "/hello":
                  name = request.getParameter("name");
                  lastname = request.getParameter("lastname");
                  request.setAttribute("info","Привет,"+ name  + lastname +"!") ; 
-                  request.getRequestDispatcher("/index.jsp")
+                 request.getRequestDispatcher("/index.jsp")
                       .forward(request, response);
-        }
+                 break;
+            case "/showtakeOnBook",:
+                listBooks = bookFacade.findAll();
+                listReader = bookFacade.findAll();  
+                request.setAttribute(" listReader", listReader);
+                request.setAttribute(" listBook", listBook);
+                 request.getRequestDispatcher("/WEB-INF/showtakeOnBook.jsp")
+                          .forward(request, response);
+                 break;
+            case "/takeOnBook", 
+                String bookId = request.getParameter("bookId");
+                String readerId  = request.getParameter("readerId");
+                book = bookFacade.find(long.parseLong(bookId));
+                reader = readerFacade.find(long.parseLong(readerId));
+                History history = new History();
+                history.setBook (book);
+                history.setReader (reader);
+                history.setTakeOn(new Date());
+                history.Facade.create(history); 
+                request.setAttribute("info", "Книга\"");
+                     +book.getTitle()
+                     +"\" Выдана читателю:"
+                    +reader.getName()
+                   +" " + reader.getLastname()
+                );             
+              request.getRequestDispatcher("/index.jsp")                 
+                        .forward(request, response);
+          }
     }      
     
-    // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
+        // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">
     /**
      * Handles the HTTP <code>GET</code> method.
      *
@@ -139,5 +182,4 @@ public class MyServlet extends HttpServlet {
     public String getServletInfo() {
         return "Short description";
     }// </editor-fold>
-
-   }
+}

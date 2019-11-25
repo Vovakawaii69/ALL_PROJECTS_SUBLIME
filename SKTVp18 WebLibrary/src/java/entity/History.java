@@ -75,4 +75,6 @@ public class History implements Serializable{
     public void setId(Long id) {
         this.id = id;
 }
-}
+
+    
+    }
