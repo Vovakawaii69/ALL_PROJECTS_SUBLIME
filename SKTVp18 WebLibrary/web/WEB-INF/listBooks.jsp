@@ -15,8 +15,8 @@
     <body>
         <h1>Spisok nasih knig</h1>
         <ul>
-            <c:forEach var="book" item="$listBooks">
-            <li>${book.title}.$ {book.author}.${book.year}</li>
+            <c:forEach var="book" item="${listBooks}">
+            <li>${book.title}. ${book.author}.${book.year}</li>
             <c:forEach> 
        </ul>     
          

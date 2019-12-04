@@ -19,6 +19,6 @@
             Gog izdanija knigi: <input type="text" name ="year"><br>
             Kolichestvo:<input type="text" name ="quantity"><br>
             <input type="submit" value ="sozdat knigu"><br>
-            
+         </from>
     </body>
 </html>

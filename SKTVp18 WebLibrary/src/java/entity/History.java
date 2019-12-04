@@ -73,8 +73,10 @@ public class History implements Serializable{
     }
 
     public void setId(Long id) {
-        this.id = id;
-}
-
-    
+        this.id = id;   
     }
+
+    public void getReturnDate(Date date) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+}  

@@ -13,8 +13,10 @@
     </head>
     <body>
         <h1>Список наших читателей</h1>
+        <ul>
         <c:forEach var="book" item="$listBooks">
             <li>${reader.name}.$ {reader.lastname}.${reader.email}</li>
             <c:forEach> 
+         </ul>       
     </body>
 </html>

@@ -18,8 +18,10 @@
      <p>izutchem kak rabotaet webprilozenie na Java</p>
        <a href= showLogin> Вход</a><br> 
        <a href="newBook"> Создать книгу </a><br>
+       <a href="listBooks">Список книг</a><br>
        <a href="newReader"> Создать книгу </a><br>
-      <a href="listReader"> Список читателей </a><br>
-       <a href="takeOnBook"> Выдать книгу читателю</a><br>
+       <a href="listReader"> Список читателей </a><br>
+       <a href="showTakeOnBook"> Выдать книгу читателю</a><br>
+       <a href="showReturnBook">Возвращена</a><br> 
     </body>
 </html>

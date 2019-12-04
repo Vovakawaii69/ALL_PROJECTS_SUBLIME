@@ -6,6 +6,10 @@
 package session;
 
 import entity.History;
+import static java.nio.file.Files.list;
+import static java.rmi.Naming.list;
+import static java.util.Collections.list;
+import java.util.List;
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -29,4 +33,17 @@ public class HistoryFacade extends AbstractFacade<History> {
         super(History.class);
     }
     
-}
+    public List<History> findTookBook(){
+        try {
+            return em.createQuery("SELECT history FROM History history WHERE history.returnDate = null")
+                   .getResultList();
+        } catch (Exception e) {
+            return null;
+        }
+    }
+} 
+
+    
+        
+    
+
