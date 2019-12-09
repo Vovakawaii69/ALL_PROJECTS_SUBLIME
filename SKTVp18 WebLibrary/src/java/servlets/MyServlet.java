@@ -58,11 +58,10 @@ public class MyServlet extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException{
-        response.setContentType("text/html;charset=UTF-8");
-        request.setCharacterEncoding("UTF-8");
-        String path = request.getServletPath();
-       
-          switch (path) {    
+            response.setContentType("text/html;charset=UTF-8");
+            request.setCharacterEncoding("UTF-8");
+            String path = request.getServletPath();
+            switch (path) {    
               case "/newBook":
                request.getRequestDispatcher("/WEB-INF/newBook.jsp")
                         .forward(request, response);
@@ -115,7 +114,7 @@ public class MyServlet extends HttpServlet {
                 String login = request.getParameter("login");
                 String password = request.getParameter("password");
                 if("ivan".equals(login)&& "123123".equals(password)){
-               request.setAttribute("info","Привет,"+ login+"!") ;
+                request.setAttribute("info","Привет,"+ login+"!") ;
                 }else{
                  request.setAttribute("info", "Неправельный логин или пароль");
                 } 
@@ -129,8 +128,7 @@ public class MyServlet extends HttpServlet {
                  request.getRequestDispatcher("/index.jsp")
                       .forward(request, response);
                  break;
-            case "/showTakeOnBook":
-              
+            case "/showTakeOnBook":    
                List<Book> listBooks = bookFacade.findAll(); 
                 listReaders=readerFacade.findAll();
                 request.setAttribute("listBooks", listBooks);

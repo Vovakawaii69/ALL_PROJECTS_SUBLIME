@@ -16,13 +16,15 @@
     </head>
     <body>
           <h1>Возврат книг</h1> 
-         <form action="takeOnBook" method="POST"></form>
+          <p> ${info}</p>
+          <a href="index.jsp">Главная страница</a><br>
+          <form action="returnOnBook" method="POST">
          
-        <h2>Список выданных книг</h2> </br>
+           Список выданных книг: </br>
         <select name="historyId" size="3">
-           <c:forEach var="histoty" item="${listHistories}" varStatus="status">
-            <option value ="${historyId}">
-            ${status.index+1}.${history.reader.name}. ${history.reader.lastname}. читает книгу ${history.book}
+           <c:forEach var="histoty" items="${listHistories}" varStatus="status">
+            <option value ="${history.id}">
+            ${status.index+1}.${history.reader.name}. ${history.reader.lastname} читает книгу ${history.book.title}
               </option> 
              <c:forEach> 
            </select> 

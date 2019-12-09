@@ -68,13 +68,14 @@ public class Reader implements Serializable {
         this.id = id;
     }
 
+  
     @Override
     public int hashCode() {
-        int hash = 3;
-        hash = 59 * hash + Objects.hashCode(this.id);
-        hash = 59 * hash + Objects.hashCode(this.name);
-        hash = 59 * hash + Objects.hashCode(this.lastname);
-        hash = 59 * hash + Objects.hashCode(this.email);
+        int hash = 7;
+        hash = 37 * hash + Objects.hashCode(this.id);
+        hash = 37 * hash + Objects.hashCode(this.name);
+        hash = 37 * hash + Objects.hashCode(this.lastname);
+        hash = 37 * hash + Objects.hashCode(this.email);
         return hash;
     }
 
@@ -103,6 +104,6 @@ public class Reader implements Serializable {
             return false;
         }
         return true;
-    }
+    } 
     
 }
