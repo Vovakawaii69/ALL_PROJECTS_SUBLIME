@@ -112,14 +112,14 @@ public class MyServlet extends HttpServlet {
               
             case "/login":
                 String login = request.getParameter("login");
-                String password = request.getParameter("password");
-                if("ivan".equals(login)&& "123123".equals(password)){
+                 if("ivan".equals(login)&& "123123".equals(password)){
                 request.setAttribute("info","Привет,"+ login+"!") ;
                 }else{
                  request.setAttribute("info", "Неправельный логин или пароль");
                 } 
                 request.getRequestDispatcher("/index.jsp")
                       .forward(request, response);
+              
                  break; 
             case "/hello":
                  name = request.getParameter("name");
