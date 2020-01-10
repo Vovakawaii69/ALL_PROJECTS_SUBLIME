@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title>Элементы типа email, url, tel</title>
+</head>
+<body>
+    <form>
+        <fieldset>
+            <legend>Контактная информация</legend>
+            <p>
+                <label>
+                    E-mail
+                    <input type="email" name="email" title="Формат данных не правельный. Только в Chrome"/>
+                </label>
+            </p>
+            <p>
+                <label>
+                    Сайт
+                    <input type="url" name="website" title="Обсолютный URL. Обязательно с протоколом HTPP. Пример-http://html5Readiness.com/"/></label>
+            </p>
+            <p>
+                <label>
+                    Телефон
+                    <input type="tel" name="phone"/></label>
+            </p>
+        </fieldset>
+        <br>
+        <p>
+            <input type="submit" value="Отправить">
+        </p>
+    </form>
+</body>
+</html>

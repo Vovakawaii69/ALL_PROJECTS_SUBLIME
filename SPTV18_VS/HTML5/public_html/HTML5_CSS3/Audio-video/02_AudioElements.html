@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>audio element</title>
+	<script src="js/Modernizr-2.0.6.js"></script>
+</head>
+<body>
+	<audio id="audio" src="audio/Vivaldi.ogg">
+		Brauzer ne podderzivaet vosproizvedenie zvukovih mediafaylov
+	</audio>
+	<script>
+		if(!Modernizr.audio){
+			alert("Brauzer ne podderzivaet vosproizvedenie zvukovih mediafaylov")
+		}
+		else {
+			var audio=document.getElementById("audio");
+			var res=audio.canPlayType('audio/ogg; codecs="vorbis"');
+			if(res) alert(res+"can play ogg vorbis");
+			else alert("no support for ogg vorbis");
+		}
+	</script>
+</body>
+</html>

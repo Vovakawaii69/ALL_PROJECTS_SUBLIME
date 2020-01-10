@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Svoystvo currentTime</title>
+</head>
+<body>
+	<audio>
+		<source src="audio/Vivaldi.mp3">
+		<source src="audio/Vivaldi.ogg">
+	</audio>
+	<button title="Vosproizvesti c 30 cekundi" onclick="play(30);">30 sekunda</button>
+	<script>
+		function playAt(seconds){
+			var audio=document.getElementByTagName("audio")[0];
+			audio.currentTime=seconds;
+			audio.play();
+		}
+	</script>
+	<button title="Ostanovitj vosproizvedenie" onclick="stopAudio();">STOP</button>
+	<script>
+		function stopAudio(){
+			var audio=document.getElementByTagName("audio")[0];
+			audio.currentTime=0;
+			audio.pause();
+		}
+	</script>
+</body>
+</html>

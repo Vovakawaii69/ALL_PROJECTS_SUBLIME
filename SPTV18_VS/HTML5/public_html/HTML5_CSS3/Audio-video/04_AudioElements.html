@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Upravlenie vosproizvedeniem c pomosju JavaScript</title>
+</head>
+<body>
+	<input id="playButton" type="button" value="play">
+	<audio id="audioElement">
+		<source src="audio/Vivaldi.mp3">
+		<source src="audio/Vivaldi.ogg">
+	</audio>
+	<script>
+		document.getElementById("playButton").onclick=playSound;
+		function playSound(){
+			var music=document.getElementById("audioElement");
+			var button=document.getElementById("playButton");
+			if(music.paused){
+				music.play();
+				button.value="stop";
+			}else{
+				music.paused();
+				button.value="play";
+			}
+		}
+	</script>
+</body>
+</html>
